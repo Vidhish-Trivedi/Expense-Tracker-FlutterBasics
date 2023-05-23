@@ -10,10 +10,19 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  var _title = "";
+  // var _title = "";
+  //
+  // void _saveTitle(String input) {
+  //   _title = input;
+  // }
 
-  void _saveTitle(String input) {
-    _title = input;
+  final _titleController = TextEditingController();
+
+  // Flutter needs to explicitly remove the above controller.
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
   }
 
   @override
@@ -23,7 +32,8 @@ class _NewExpenseState extends State<NewExpense> {
       child: Column(
         children: [
           TextField(
-            onChanged: _saveTitle,
+            // onChanged: _saveTitle,
+            controller: _titleController,
             maxLength: 50,
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(
@@ -35,7 +45,7 @@ class _NewExpenseState extends State<NewExpense> {
           Row(
             children: [
               ElevatedButton(onPressed: () {
-                print(_title);
+                print(_titleController.text);
               }, child: const Text("Save")),
             ],
           ),
