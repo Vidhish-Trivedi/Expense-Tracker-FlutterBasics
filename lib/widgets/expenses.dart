@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
+import 'package:expense_tracker/widgets/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -32,15 +33,25 @@ class _ExpensesState extends State<Expenses> {
         category: Category.travel),
   ];
 
+  void _displayAddExpenseModal() {
+    // Used to display a modal on clicking the + button.
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) {
+        return (const NewExpense());
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return (Scaffold(
       appBar: AppBar(
         title: const Text("Expense Tracker"),
-        actions: const [
+        actions: [
           IconButton(
-            onPressed: null,
-            icon: Icon(Icons.add),
+            onPressed: _displayAddExpenseModal,
+            icon: const Icon(Icons.add),
           ),
         ],
       ),
@@ -53,3 +64,8 @@ class _ExpensesState extends State<Expenses> {
     ));
   }
 }
+
+// Inside a class that extends State <>, a context property is
+// made available by Flutter.
+// Context contains information on relation about widget meta data and its relation
+// to other widgets in the overall widget tree.
