@@ -158,20 +158,13 @@ class _NewExpenseState extends State<NewExpense> {
                 },
               ),
               const Spacer(),
-              ElevatedButton(
+              TextButton(
                   onPressed: () {
-                    // print("Cancelled");
                     Navigator.pop(context);
                   },
                   child: const Text("Cancel")),
               ElevatedButton(
                   onPressed: _submitExpenseData,
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.purpleAccent),
-                    foregroundColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.white),
-                  ),
                   child: const Text("Save")),
             ],
           ),
