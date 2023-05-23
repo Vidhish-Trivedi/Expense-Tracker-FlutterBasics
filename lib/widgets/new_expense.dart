@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense(this.onAddExpense, {super.key});
+
+  final void Function(Expense expense) onAddExpense;
 
   @override
   State<StatefulWidget> createState() {
@@ -15,6 +17,46 @@ class _NewExpenseState extends State<NewExpense> {
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
   Category _selectedCategory = Category.leisure;
+
+  void _submitExpenseData() {
+    final inputAmount = double.tryParse(_amountController.text);
+    final isAmountInvalid = inputAmount == null || inputAmount <= 0;
+
+    if (_titleController.text
+        .trim()
+        .isEmpty ||
+        isAmountInvalid ||
+        _selectedDate == null) {
+      // Display error.
+      showDialog(
+        context: context,
+        builder: (ctx) =>
+            AlertDialog(
+              title: const Text("Invalid input!"),
+              content: const Text(
+                  "Please make sure a valid title, amount and date were entered."),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                  },
+                  child: const Text("Okay"),
+                )
+              ],
+            ),
+      );
+      return;
+    }
+
+    Expense newExpense = Expense(
+      title: _titleController.text.trim(),
+      amount: inputAmount,
+      date: _selectedDate!,
+      category: _selectedCategory,);
+
+    widget.onAddExpense(newExpense);
+    Navigator.pop(context);
+  }
 
   // showDatePicker returns a "Future" value.
   // Instead of async-await, we can also use .then() on showDatePicker.
@@ -42,7 +84,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return (Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       child: Column(
         children: [
           TextField(
@@ -100,13 +142,14 @@ class _NewExpenseState extends State<NewExpense> {
               DropdownButton(
                 value: _selectedCategory,
                 items: Category.values
-                    .map((category) => DropdownMenuItem(
-                          value: category,
-                          child: Text(category.name.toUpperCase()),
-                        ))
+                    .map((category) =>
+                    DropdownMenuItem(
+                      value: category,
+                      child: Text(category.name.toUpperCase()),
+                    ))
                     .toList(),
                 onChanged: (value) {
-                  if(value == null){
+                  if (value == null) {
                     return;
                   }
                   setState(() {
@@ -122,16 +165,12 @@ class _NewExpenseState extends State<NewExpense> {
                   },
                   child: const Text("Cancel")),
               ElevatedButton(
-                  onPressed: () {
-                    // TODO: add logic to create a new expense.
-                    print(_titleController.text);
-                    print(_amountController.text);
-                  },
+                  onPressed: _submitExpenseData,
                   style: ButtonStyle(
                     backgroundColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.purpleAccent),
+                            (states) => Colors.purpleAccent),
                     foregroundColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.white),
+                            (states) => Colors.white),
                   ),
                   child: const Text("Save")),
             ],
