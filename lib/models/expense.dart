@@ -34,10 +34,32 @@ class Expense {
   final Category category;
 
   String get formattedDate {
-    return(formatter.format(date));
+    return (formatter.format(date));
   }
 }
 
-// In Dart, "initializer lists" can be used to initialize
-// class properties with values that are not received
-// as constructor function arguments, like id.
+// For chart.
+class ExpenseBucket {
+  const ExpenseBucket({
+    required this.category,
+    required this.expenses,
+  });
+
+  // Add a named constructor.
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+      : expenses = allExpenses
+            .where((element) => element.category == category ? true : false)
+            .toList();
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpense {
+    double sum = 0;
+
+    for (final expense in expenses) {
+      sum += expense.amount;
+    }
+    return (sum);
+  }
+}
