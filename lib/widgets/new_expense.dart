@@ -10,18 +10,14 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
-  // var _title = "";
-  //
-  // void _saveTitle(String input) {
-  //   _title = input;
-  // }
-
   final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
 
   // Flutter needs to explicitly remove the above controller.
   @override
   void dispose() {
     _titleController.dispose();
+    _amountController.dispose();
     super.dispose();
   }
 
@@ -32,7 +28,6 @@ class _NewExpenseState extends State<NewExpense> {
       child: Column(
         children: [
           TextField(
-            // onChanged: _saveTitle,
             controller: _titleController,
             maxLength: 50,
             keyboardType: TextInputType.text,
@@ -42,11 +37,41 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ),
           ),
+          TextField(
+            controller: _amountController,
+            maxLength: 10,
+            keyboardType: const TextInputType.numberWithOptions(
+              decimal: true,
+              signed: false,
+            ),
+            decoration: const InputDecoration(
+              prefixText: "\$ ",
+              label: Text(
+                "Amount",
+              ),
+            ),
+          ),
           Row(
             children: [
-              ElevatedButton(onPressed: () {
-                print(_titleController.text);
-              }, child: const Text("Save")),
+              const Spacer(),
+              ElevatedButton(
+                  onPressed: () {
+                    // print("Cancelled");
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Cancel")),
+              ElevatedButton(
+                  onPressed: () {
+                    print(_titleController.text);
+                    print(_amountController.text);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.purpleAccent),
+                    foregroundColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.white),
+                  ),
+                  child: const Text("Save")),
             ],
           ),
         ],
