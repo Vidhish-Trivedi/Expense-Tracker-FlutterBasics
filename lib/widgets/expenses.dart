@@ -51,9 +51,27 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _dismissExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
     });
+    // Clear any existing pop-ups before displaying a new one.
+    ScaffoldMessenger.of(context).clearSnackBars();
+    // Display a new pop-up message.
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: const Text(
+          "Expense dismissed!",
+        ),
+        action: SnackBarAction(label: "Undo", onPressed: () {
+          setState(() {
+            // Re-insert the expense at the same location/index in the list.
+            _registeredExpenses.insert(expenseIndex, expense);
+          });
+        },),
+      ),
+    );
   }
 
   @override
@@ -72,10 +90,16 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text("Chart Here..."),
           Expanded(
-              child: ExpensesList(
-            expenses: _registeredExpenses,
-            onDismissExpense: _dismissExpense,
-          )),
+              child: _registeredExpenses.isEmpty
+                  ? const Center(
+                      child: Text(
+                        "No expenses found!",
+                      ),
+                    )
+                  : ExpensesList(
+                      expenses: _registeredExpenses,
+                      onDismissExpense: _dismissExpense,
+                    )),
         ],
       ),
     ));
