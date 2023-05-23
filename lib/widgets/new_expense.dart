@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -12,6 +13,23 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDate;
+  Category _selectedCategory = Category.leisure;
+
+  // showDatePicker returns a "Future" value.
+  // Instead of async-await, we can also use .then() on showDatePicker.
+  void _displayDatePicker() async {
+    final now = DateTime.now();
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: DateTime(now.year - 1, now.month, now.day),
+      lastDate: now,
+    );
+    setState(() {
+      _selectedDate = pickedDate;
+    });
+  }
 
   // Flutter needs to explicitly remove the above controller.
   @override
@@ -37,22 +55,65 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ),
           ),
-          TextField(
-            controller: _amountController,
-            maxLength: 10,
-            keyboardType: const TextInputType.numberWithOptions(
-              decimal: true,
-              signed: false,
-            ),
-            decoration: const InputDecoration(
-              prefixText: "\$ ",
-              label: Text(
-                "Amount",
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  maxLength: 10,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                    signed: false,
+                  ),
+                  decoration: const InputDecoration(
+                    prefixText: "\$ ",
+                    label: Text(
+                      "Amount",
+                    ),
+                  ),
+                ),
               ),
-            ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      _selectedDate == null
+                          ? "No date selected!"
+                          : formatter.format(_selectedDate!),
+                    ),
+                    // ! is added after a possibly null value to tell Dart that this value won't be null.
+                    IconButton(
+                      onPressed: _displayDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
           Row(
             children: [
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map((category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category.name.toUpperCase()),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  if(value == null){
+                    return;
+                  }
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                },
+              ),
               const Spacer(),
               ElevatedButton(
                   onPressed: () {
@@ -62,6 +123,7 @@ class _NewExpenseState extends State<NewExpense> {
                   child: const Text("Cancel")),
               ElevatedButton(
                   onPressed: () {
+                    // TODO: add logic to create a new expense.
                     print(_titleController.text);
                     print(_amountController.text);
                   },
