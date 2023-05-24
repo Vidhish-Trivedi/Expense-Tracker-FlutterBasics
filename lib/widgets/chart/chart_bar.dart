@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 
-class ChartBar extends StatefulWidget {
-  const ChartBar({super.key});
+class ChartBar extends StatelessWidget {
+  const ChartBar({super.key, required this.fill});
 
-  @override
-  State<ChartBar> createState() {
-    return(_ChartBarState());
-  }
-}
+  final double fill;
 
-class _ChartBarState extends State <ChartBar> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: FractionallySizedBox(
+          heightFactor: fill,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(8)),
+              color: isDarkMode
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.primary.withOpacity(0.65),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
