@@ -17,30 +17,30 @@
 ## Preview
 - Initial screen
 <p align="center">
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/7224daf7-89b2-44b8-8c3c-2866f372f74b" />
+  <img src="http://drive.google.com/uc?export=view&id=1UwXwUPtw9MPx9ec8h0dG5h-Yyx6rsT9o" />
 </p>
 
 - Swipe to remove an expense, can undo a removal
 <p align="center">
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/82fb3efe-e36f-443a-8413-41c73f81a45a" />
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/cdb79e88-f2fa-4e30-ac9c-42115657e57b" />
+  <img src="http://drive.google.com/uc?export=view&id=1YZbs6xXYh8ZyKplUFQ5_RBOwr8Zr47Wz" />
+  <img src="http://drive.google.com/uc?export=view&id=1Pws6PlIMnjdAiiw8Lhre4bNCj6Ri_AcT" />
 </p>
 
 - Modal for adding a new expense, validation
 <p align="center">
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/11e00112-edb1-4f52-b922-7685a358c4f2" />
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/4aaafa09-0be7-4d9a-b39f-e119678411ca" />
+  <img src="http://drive.google.com/uc?export=view&id=1Pws6PlIMnjdAiiw8Lhre4bNCj6Ri_AcT" />
+  <img src="http://drive.google.com/uc?export=view&id=1DRTySDWwo_kCYKJKRgzwROYK4OSb_UBP" />
 </p>
 
 - Dropdown menu and date picker
 <p align="center">
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/9c08114c-6d09-4d77-9a6a-6203a9ddf6fb" />
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/246a96a1-c1cf-4f54-b76e-2ae1ae8acca8" />
+  <img src="http://drive.google.com/uc?export=view&id=1IZdNKgRnGSy5i4egZy4sAGwARn5IG0zj" />
+  <img src="http://drive.google.com/uc?export=view&id=1Zx556z0p4nTfumFX9NmdKnMJ81sgSryF" />
 </p>
 
 - New expense added
 <p align="center">
-  <img src="https://github.com/Vidhish-Trivedi/Expense-Tracker-FlutterBasics/assets/96025781/f7f432fe-ea16-4e4f-878d-a18d3a418de9" />
+  <img src="http://drive.google.com/uc?export=view&id=16HKb6JQN86IPBNG9eZDgvr0O7vyaheKy" />
 </p>
 
 ---
