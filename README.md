@@ -23,7 +23,7 @@
 - Swipe to remove an expense, can undo a removal
 <p align="center">
   <img src="http://drive.google.com/uc?export=view&id=1YZbs6xXYh8ZyKplUFQ5_RBOwr8Zr47Wz" />
-  <img src="http://drive.google.com/uc?export=view&id=1Pws6PlIMnjdAiiw8Lhre4bNCj6Ri_AcT" />
+  <img src="http://drive.google.com/uc?export=view&id=14tV5rX0iks5F6vw89kzWQI1oL7g7GqJM" />
 </p>
 
 - Modal for adding a new expense, validation
